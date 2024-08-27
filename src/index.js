@@ -7,9 +7,11 @@ import { observeImage } from './lazy.js';
  * @param {string} containerId - El ID del contenedor donde se insertará el nodo.
  * @param {string} imageUrl - La URL de la imagen que se insertará.
  */
+let counterChilds = 0;
 function insertImageNode(containerId, imageUrl) {
     // Obtener el contenedor por su ID
     const container = document.getElementById(containerId);
+    
 
     // Verificar si el contenedor existe
     if (!container) {
@@ -39,9 +41,27 @@ function insertImageNode(containerId, imageUrl) {
 
     // Añadir el 'div' al contenedor
     container.appendChild(div);
-
+    counterChilds++
+    console.log(`Total de imagenes: ${counterChilds}`)
     // Llamar a la función para observar la imagen
-    observeImage(img);
+    observeImage(img,counterChilds);
+}
+
+/**
+ * Elimina todos los nodos con imágenes del contenedor especificado.
+ * @param {string} containerId - El ID del contenedor del que se eliminarán las imágenes.
+ */
+function clearImageNodes(containerId) {
+    const container = document.getElementById(containerId);
+
+    if (!container) {
+        console.error(`Contenedor con ID '${containerId}' no encontrado.`);
+        return;
+    }
+
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
 }
 
 //Función random
@@ -50,10 +70,19 @@ const minimum = 1
 const random = () => Math.floor(Math.random()*(maximum - minimum)) + minimum 
 
 
-// Accion del boton
+// Accion del boton insertar
 const ActionInsertImage = () => {
     // Uso de la función
     insertImageNode('container_images', `https://randomfox.ca/images/${random()}.jpg`);
 }
+
+// Accion del boton insertar
+const ActionClearImage =() => {
+    clearImageNodes('container_images');
+}
+
 // Manejar el clic del botón para insertar la imagen
 document.getElementById('insertButton').addEventListener('click', ActionInsertImage);
+
+// Manejar el clic del botón para limpiar las imágenes
+document.getElementById('clearButton').addEventListener('click',ActionClearImage );

@@ -51,7 +51,7 @@ function insertImageNode(containerId, imageUrl) {
     container.appendChild(div);
 
     counterChilds++
-    console.log(`Total de imagenes: ${counterChilds}`)
+    console.log(`⚪ Total de imagenes: ${counterChilds}`)
     setTimeout(onLoadImg, 2000);
     // Llamar a la función para observar la imagen
     observeImage(img);

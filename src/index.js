@@ -7,7 +7,7 @@ import { observeImage } from './lazy.js';
  * @param {string} containerId - El ID del contenedor donde se insertará el nodo.
  * @param {string} imageUrl - La URL de la imagen que se insertará.
  */
-let counterChilds = 0;
+
 function insertImageNode(containerId, imageUrl) {
     // Obtener el contenedor por su ID
     const container = document.getElementById(containerId);
@@ -50,8 +50,8 @@ function insertImageNode(containerId, imageUrl) {
     // Añadir el 'div' al contenedor
     container.appendChild(div);
 
-    counterChilds++
-    console.log(`⚪ Total de imagenes: ${counterChilds}`)
+    counterChilds++;
+    printLog();
     setTimeout(onLoadImg, 2000);
     // Llamar a la función para observar la imagen
     observeImage(img);

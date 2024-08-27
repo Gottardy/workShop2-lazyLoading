@@ -1,3 +1,7 @@
+// Importar la función observeImage desde el archivo observer.js
+import { observeImage } from './lazy.js';
+
+
 /**
  * Inserta un nodo con una imagen en el contenedor especificado.
  * @param {string} containerId - El ID del contenedor donde se insertará el nodo.
@@ -17,6 +21,10 @@ function insertImageNode(containerId, imageUrl) {
     const div = document.createElement('div');
     div.id = 'image';
     div.classList.add('p-4');
+    div.classList.add('my-4');
+    div.classList.add('bg-white');
+    div.classList.add('shadow-md');
+    div.classList.add('rounded');
 
     // Crear el nodo 'img' con la URL de la imagen y las clases especificadas
     const img = document.createElement('img');
@@ -30,6 +38,9 @@ function insertImageNode(containerId, imageUrl) {
 
     // Añadir el 'div' al contenedor
     container.appendChild(div);
+
+    // Llamar a la función para observar la imagen
+    observeImage(img);
 }
 
 //Función random

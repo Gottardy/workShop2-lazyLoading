@@ -22,29 +22,39 @@ function insertImageNode(containerId, imageUrl) {
     // Crear el nodo 'div' con el ID y la clase especificada
     const div = document.createElement('div');
     div.id = 'image';
-    div.classList.add('p-4');
-    div.classList.add('my-4');
-    div.classList.add('bg-white');
-    div.classList.add('shadow-md');
-    div.classList.add('rounded');
+    div.classList.add('p-4','my-4','bg-white','shadow-md','rounded');
+    
+    // Crear el contenedor del skeleton
+    const skeletonDiv = document.createElement('div');
+    skeletonDiv.classList.add('p-4', 'bg-gray-200', 'animate-pulse');
+
 
     // Crear el nodo 'img' con la URL de la imagen y las clases especificadas
     const img = document.createElement('img');
     img.dataset.src = imageUrl;
     img.alt = '';
-    img.classList.add('mx-auto');
+    img.classList.add('mx-auto', 'hidden');
     img.width = 320;
-    img.loading = 'lazy';
+    
+    // Reemplazar el skeleton con la imagen cuando se cargue
+    const onLoadImg = () => {
+        skeletonDiv.classList.remove('bg-gray-200', 'animate-pulse');
+        img.classList.remove('hidden');
+    };
 
+    // Añadir el nodo 'img' dentro del 'skeletonDiv'
+    skeletonDiv.appendChild(img);
     // Añadir el nodo 'img' dentro del 'div'
-    div.appendChild(img);
-
+    div.appendChild(skeletonDiv);
+    
     // Añadir el 'div' al contenedor
     container.appendChild(div);
+
     counterChilds++
     console.log(`Total de imagenes: ${counterChilds}`)
+    setTimeout(onLoadImg, 2000);
     // Llamar a la función para observar la imagen
-    observeImage(img,counterChilds);
+    observeImage(img);
 }
 
 /**
@@ -52,6 +62,7 @@ function insertImageNode(containerId, imageUrl) {
  * @param {string} containerId - El ID del contenedor del que se eliminarán las imágenes.
  */
 function clearImageNodes(containerId) {
+    counterChilds = 0;
     const container = document.getElementById(containerId);
 
     if (!container) {

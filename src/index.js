@@ -28,10 +28,11 @@ function insertImageNode(containerId, imageUrl) {
 
     // Crear el nodo 'img' con la URL de la imagen y las clases especificadas
     const img = document.createElement('img');
-    img.src = imageUrl;
+    img.dataset.src = imageUrl;
     img.alt = '';
     img.classList.add('mx-auto');
     img.width = 320;
+    img.loading = 'lazy';
 
     // Añadir el nodo 'img' dentro del 'div'
     div.appendChild(img);

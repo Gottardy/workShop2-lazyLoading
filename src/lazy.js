@@ -6,8 +6,10 @@ export function observeImage(imageElement) {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                console.log(`La imagen ${entry.target.src} está visible en la pantalla.`);
+                const url = entry.target.dataset.src
+                console.log(`La imagen ${entry.target.dataset.src} está visible en la pantalla.`);
                 // Aquí puedes agregar más lógica para manejar la imagen cuando se vuelve visible
+                entry.target.src = url;
                 observer.unobserve(entry.target); // Dejar de observar después de que la imagen sea visible
             }
         });
